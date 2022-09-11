@@ -204,4 +204,17 @@ public class CampoTest {
         Assertions.assertEquals("?", campo.toString());
     }
 
+    @Test
+    void testeObjetivoAlcancadoDesvendado() {
+        campo.abrir();
+        Assertions.assertTrue(campo.objetivoAlcancado());
+    }
+
+    @Test
+    void testeObjetivoAlcancadoProtegido() {
+        campo.minar();
+        campo.marcar();
+        Assertions.assertTrue(campo.objetivoAlcancado());
+    }
+
 }
