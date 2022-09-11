@@ -1,7 +1,6 @@
 package com.brancherapps.cm.modelo;
 
 
-import modelo.Campo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
