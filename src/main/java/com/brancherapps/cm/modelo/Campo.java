@@ -14,7 +14,7 @@ public class Campo {
     private boolean minado;
     private boolean marcado;
 
-    private List<Campo> vizinhos = new ArrayList<>();
+    private final List<Campo> vizinhos = new ArrayList<>();
 
     Campo(int linha, int coluna){
         this.linha = linha;
@@ -28,12 +28,12 @@ public class Campo {
 
         int deltaLinha = Math.abs(linha - vizinho.linha);
         int deltaColuna = Math.abs(linha - vizinho.coluna);
-        int detalGeral = deltaColuna + deltaLinha;
+        int deltaGeral = deltaColuna + deltaLinha;
 
-        if (detalGeral == 1 && !diagonal) {
+        if (deltaGeral == 1 && !diagonal) {
             vizinhos.add(vizinho);
             return true;
-        } else if (detalGeral == 2 && diagonal) {
+        } else if (deltaGeral == 2 && diagonal) {
             vizinhos.add(vizinho);
             return true;
         } else {
@@ -57,7 +57,7 @@ public class Campo {
             }
 
             if (vizinhancaSegura()) {
-                vizinhos.forEach(v -> v.abrir());
+                vizinhos.forEach(Campo::abrir);
             }
             return true;
 
@@ -68,6 +68,22 @@ public class Campo {
 
     boolean vizinhancaSegura() {
         return vizinhos.stream().noneMatch(v -> v.minado);
+    }
+
+    void minar() {
+        minado = true;
+    }
+
+    public boolean isMarcado() {
+        return marcado;
+    }
+
+    public boolean isAberto(){
+        return aberto;
+    }
+
+    public boolean isFechado(){
+        return !isAberto();
     }
 
 }
