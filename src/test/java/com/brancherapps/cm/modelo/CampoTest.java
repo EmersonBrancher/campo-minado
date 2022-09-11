@@ -153,4 +153,55 @@ public class CampoTest {
         Assertions.assertTrue(campo22.isAberto() && campo11.isFechado());
     }
 
+    @Test
+    void testeGetLinhaGetColuna() {
+        Assertions.assertEquals(3, campo.getLinha());
+        Assertions.assertEquals(3, campo.getColuna());
+
+    }
+
+    @Test
+    void testeReiniciado() {
+        campo.abrir();
+        campo.minar();
+        campo.marcar();
+        campo.reiniciar();
+        Assertions.assertFalse(campo.isAberto());
+        Assertions.assertFalse(campo.isMinado());
+        Assertions.assertFalse(campo.isMarcado());
+    }
+
+    @Test
+    void testeToStringMarcado() {
+        campo.marcar();
+        Assertions.assertEquals("x", campo.toString());
+    }
+
+    @Test
+    void testeToStringAbertoEMinado() {
+        campo.abrir();
+        campo.minar();
+        Assertions.assertEquals("*", campo.toString());
+    }
+
+    @Test
+    void testeToStringAbertoComMinasNaVizinhanca() {
+        campo.abrir();
+        Campo campo44 = new Campo(4, 4);
+        campo44.minar();
+        campo.adicionarVizinho(campo44);
+        Assertions.assertEquals("1", campo.toString());
+    }
+
+    @Test
+    void testeToStringAberto() {
+        campo.abrir();
+        Assertions.assertEquals(" ", campo.toString());
+    }
+
+    @Test
+    void testeToStringSemInteracao() {
+        Assertions.assertEquals("?", campo.toString());
+    }
+
 }
